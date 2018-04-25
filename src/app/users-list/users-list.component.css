@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.users-table {
+    margin-top: 13px;
+}
+
+.clickable {
+    cursor: pointer;
+}

@@ -1,0 +1,16 @@
+<h3>Groups ({{ groups.length }})</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let group of groups; let position = index">
+      <td>{{ position + 1 }}</td>
+      <td>{{ group.name }}</td>
+    </tr>
+  </tbody>
+</table>
