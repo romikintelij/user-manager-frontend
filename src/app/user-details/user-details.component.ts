@@ -14,7 +14,6 @@ import { Button } from 'protractor';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
-
   /** Информация о пользователе */
   currentUser: User;
 
@@ -28,6 +27,9 @@ export class UserDetailsComponent implements OnInit {
   selectedGroup: Group
 
   userSaved: boolean;
+
+  /** Ошибка с сервера */
+  serverError: string;
 
   /**
    * Выбранная пользователем группа
@@ -73,13 +75,6 @@ export class UserDetailsComponent implements OnInit {
   }
 
   /**
-   * Возвращает на предыдущую страницу
-   */
-  goBack() {
-    this.location.back();
-  }
-
-  /**
    * Этот метод вызывается когда клиентский код пытается вывести группы пользователей
    * через запятую
    */
@@ -119,7 +114,7 @@ export class UserDetailsComponent implements OnInit {
     if (!this.selectedGroup) {
       throw new Error('Required selected group');
     }
-    
+
     this.userGroups.push(this.selectedGroup);
     this.selectedGroup = undefined;
   }
@@ -142,17 +137,30 @@ export class UserDetailsComponent implements OnInit {
    */
   saveUserDetails() {
     this.usersService.saveUser(this.currentUser.id, this.currentUser)
-      .subscribe(savedUser => {
-        // show that user is persisted
-        this.userSaved = true;
-
-        this.hideUserSavedAfterSeconds(5);
-      });
+      .subscribe((user) => this.showSuccessFull(user), (err) => this.showError(err));
     // todo: send new groups
   }
 
-  private hideUserSavedAfterSeconds(seconds) {
-    setTimeout(() => this.userSaved = undefined, seconds * 1000);
+  // -----------------------------------------------------------------------------------
+  // todo: Notification, I think that it's need move to self component
+  // -----------------------------------------------------------------------------------
+
+  private showSuccessFull(user: User) {
+    // show that user is persisted
+    this.userSaved = true;
+
+    // hide notification
+    this.doAfter(() => this.userSaved = undefined, 2.5);
+  }
+
+  private showError(err) {
+    this.serverError = err.error.message;
+
+    this.doAfter(() => this.serverError = undefined, 2.5);
+  }
+
+  private doAfter(fn: () => void, seconds: number) {
+    setTimeout(fn, seconds * 1000);
   }
 
 }

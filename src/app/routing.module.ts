@@ -8,7 +8,7 @@ import { UsersInGroupComponent } from './users-in-group/users-in-group.component
 const routes: Routes = [
   {path: 'users', component: UsersListComponent},
   {path: 'groups', component: GroupsListComponent},
-  {path: 'details/:id', component: UserDetailsComponent},
+  {path: 'users/:id', component: UserDetailsComponent},
   {path: 'groups/:id/users', component: UsersInGroupComponent},
   // root route
   {path: '', pathMatch: 'full', redirectTo: 'users'}

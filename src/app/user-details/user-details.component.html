@@ -1,3 +1,6 @@
+<div class="custom-alert successful" *ngIf="userSaved">User successful updated</div>
+<div class="custom-alert danger" *ngIf="serverError">{{serverError}}</div>
+
 <!-- ngIf because this page render before user loading -->
 <div *ngIf="currentUser">
     <div class="row">
@@ -5,12 +8,9 @@
             <h3>{{ currentUser.firstName + ' ' + currentUser.lastName }}</h3>
         </div>
         <div class="col-sm-7 text-right">
-            <button class="btn btn-primary" (click)="goBack()">Go back</button>
             <button type="submit" class="btn btn-success" (click)="saveUserDetails()">Save changes</button>
         </div>
     </div>
-
-    <div class="alert alert-success" *ngIf="userSaved">User was successful saved</div>
 
     <table class="table table-striped details">
         <tbody>

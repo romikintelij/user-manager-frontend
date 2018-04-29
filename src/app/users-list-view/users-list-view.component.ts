@@ -26,7 +26,7 @@ export class UsersListViewComponent implements OnInit {
    * @param userId id пользователя которого выбрал пользователь для просмотра
    */
   redirectToShowPage(userId: number) {
-    this.router.navigateByUrl(`/details/${userId}`);
+    this.router.navigateByUrl(`/users/${userId}`);
   }
 
 }

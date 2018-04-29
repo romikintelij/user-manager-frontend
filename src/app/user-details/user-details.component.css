@@ -1,3 +1,22 @@
 .details {
     margin-top: 12px;
 }
+
+.custom-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    text-align: center;
+    color: #fff;
+    z-index: 2;
+}
+
+.successful {
+    background-color: #7CB342;
+}
+
+.danger {
+    background-color: #E53935;
+}

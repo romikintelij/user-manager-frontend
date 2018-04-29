@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
@@ -28,7 +28,10 @@ import { UsersInGroupComponent } from './users-in-group/users-in-group.component
     RoutingModule,
     FormsModule
   ],
-  providers: [UsersService, GroupsService],
+  providers: [
+    UsersService, 
+    GroupsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
