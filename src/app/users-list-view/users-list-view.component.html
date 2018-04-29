@@ -1,0 +1,26 @@
+<div *ngIf="users">
+  <div *ngIf="headerEnabled">
+    <h3>Users list ({{ users.length }})</h3>
+  </div>
+
+  <table class="table table-striped users-table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Username</th>
+        <th scope="col">Date of Birth</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let position = index" class="clickable" scope="row" (click)="redirectToShowPage(user.id)">
+        <td>{{ position + 1 }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }} </td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.dateOfBirth }} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

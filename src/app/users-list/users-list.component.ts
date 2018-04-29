@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import { User } from '../user';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-users-list',
@@ -8,12 +9,12 @@ import { User } from '../user';
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit {
-  users: User[] = [];
+  allUsers: User[] = [];
 
-  // Пользователь которого мы выбрали в списке
-  selectedUserId: number;
-
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.loadUsersFromServer();
@@ -24,15 +25,6 @@ export class UsersListComponent implements OnInit {
    */
   private loadUsersFromServer() {
     this.usersService.fetchAllUsers()
-      .subscribe(users => this.users = users);
+      .subscribe(users => this.allUsers = users);
   }
-
-  /**
-   * Данная функция выбирает конкретного пользователя из списка и показывает
-   * подробную информацию по нему в новом компоненте
-   */
-  showDetails(id: number) {
-    this.selectedUserId = id;
-  }
-
 }

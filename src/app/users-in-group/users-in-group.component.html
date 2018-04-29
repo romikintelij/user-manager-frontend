@@ -1,0 +1,12 @@
+<div *ngIf="group">
+  <h3>Group: {{group.name}}</h3>
+
+  <div *ngIf="users">
+      <div *ngIf="!users.length">
+          <small>Not found users in group</small>
+      </div>
+      <div *ngIf="users.length">
+          <app-users-list-view [users]="users" [headerEnabled]="false"></app-users-list-view>
+      </div>
+  </div>
+</div>

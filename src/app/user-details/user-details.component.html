@@ -1,1 +1,80 @@
-<h5>{{ userId }}</h5>
+<!-- ngIf because this page render before user loading -->
+<div *ngIf="currentUser">
+    <div class="row">
+        <div class="col-sm-5">
+            <h3>{{ currentUser.firstName + ' ' + currentUser.lastName }}</h3>
+        </div>
+        <div class="col-sm-7 text-right">
+            <button class="btn btn-primary" (click)="goBack()">Go back</button>
+            <button type="submit" class="btn btn-success" (click)="saveUserDetails()">Save changes</button>
+        </div>
+    </div>
+
+    <div class="alert alert-success" *ngIf="userSaved">User was successful saved</div>
+
+    <table class="table table-striped details">
+        <tbody>
+            <tr *ngIf="currentUser.id">
+                <td>Id</td>
+                <td>{{ currentUser.id }}</td>
+            </tr>
+            <tr>
+                <td>First name</td>
+                <td>
+                    <input type="text" id="fn" name="fn" class="form-control" 
+                            [(ngModel)]="currentUser.firstName" #name="ngModel" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Last name</td>
+                <td>
+                    <input type="text" class="form-control" [(ngModel)]="currentUser.lastName">
+                </td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td>
+                    <input type="text" class="form-control" [(ngModel)]="currentUser.username" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Date of birth</td>
+                <td>
+                    <input type="date" class="form-control" [(ngModel)]="currentUser.dateOfBirth">
+                </td>
+            </tr>
+            <tr>
+                <td>Groups</td>
+                <td>
+                   <small>Click on group, for remove</small>
+
+                   <div style="margin-top: 12px">
+                       <p style="cursor: pointer;" *ngFor="let group of userGroups" (click)="deleteGroup(group)">
+                           {{ group.name }}
+                        </p>
+                   </div>
+                                        
+                    <!-- todo: move it to self component -->
+                    <div *ngIf="availableUserGroups.length">
+                        <hr>
+                        <small>You can add new groups</small>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <select class="form-control" [(ngModel)]="selectedGroup">
+                                    <!-- stubbed value -->
+                                    <option></option>
+                                    <option *ngFor="let group of availableUserGroups" 
+                                            [ngValue]="group">{{ group.name }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-primary btn-block" (click)="addSelectedGroup()">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

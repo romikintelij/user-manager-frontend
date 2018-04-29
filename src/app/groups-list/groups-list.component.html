@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let group of groups; let position = index">
+    <tr *ngFor="let group of groups; let position = index" (click)="toUsersInGroup(group.id)">
       <td>{{ position + 1 }}</td>
       <td>{{ group.name }}</td>
     </tr>

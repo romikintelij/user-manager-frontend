@@ -3,3 +3,7 @@
 .container {
     margin-top: 20px;
 }
+
+.ng-invalid {
+    border: 1px solid red !important;
+}
