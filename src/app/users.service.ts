@@ -13,16 +13,16 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   /**
-   * Загружает всех пользователей что есть в системе
+   * Loads all users that are in the system
    */
   fetchAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersBaseUrl);
   }
 
   /**
-   * Загружает пользователя по id
-   * 
-   * @param id пользователя которого нужно загрузить
+   * Loads a user by id
+   *
+   * @param user id to load
    */
   fetchUserById(id: number): Observable<User> {
     this.checkUserId(id);
@@ -31,10 +31,10 @@ export class UsersService {
   }
 
   /**
-   * Получает список групп пользователя к которым пользователь
-   * сейчас привязан
-   * 
-   * @param id пользователя для загрузки групп
+   * Gets a list of user groups to which the user
+   *  tied
+   *
+   * @param group user id
    */
   fetchUserGroups(id: number): Observable<Group[]> {
     this.checkUserId(id);
@@ -43,10 +43,10 @@ export class UsersService {
   }
 
   /**
-   * Метод должен сохранить новое состояние пользователя на сервере
-   * 
-   * @param id пользователя которого мы хотим сохранить
-   * @param user новые данные
+   * The method must store the new user state on the server
+   *
+   * @param id user which we want to store
+   * @param user new data
    */
   saveUser(id: number, user: User): Observable<User> {
     this.checkUserId(id);

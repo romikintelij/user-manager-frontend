@@ -28,18 +28,18 @@ export class UsersInGroupComponent implements OnInit {
   }
 
   /**
-   * Загружаем группу которую просматриваем
-   * 
-   * @param id группы которую просматриваем
+   * Load the group that is browsed
+   *
+   * @param group id which is browsed
    */
   private loadGroup(id: number) {
     this.groupService.fetchById(id).subscribe(group => this.group = group);
   }
 
   /**
-   * Загружает пользователей в группе
-   * 
-   * @param id группы
+   *Loads users into a group
+   *
+   * @param group id
    */
   private loadUsersInGroup(id: number) {
     this.groupService.fetchUsersInGroup(id).subscribe(users => this.users = users);

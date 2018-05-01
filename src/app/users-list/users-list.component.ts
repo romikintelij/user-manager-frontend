@@ -21,7 +21,7 @@ export class UsersListComponent implements OnInit {
   }
 
   /**
-   * Загружает пользователей на страницу для дальнейшего их отображения
+   * Loads users to a page for further display
    */
   private loadUsersFromServer() {
     this.usersService.fetchAllUsers()

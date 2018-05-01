@@ -2,8 +2,8 @@ import { User } from "./user";
 import { Group } from "./group";
 
 /**
- * Полная информация о пользователе, включая персональную информацию
- * и группы в которых состоит этот пользователь
+ * Full information about the user, including personal information
+ * and the groups  which contain user
  */
 export class FullUserDetails {
     user: User;

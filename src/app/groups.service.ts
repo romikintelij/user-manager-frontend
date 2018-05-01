@@ -13,25 +13,25 @@ export class GroupsService {
   constructor(private http: HttpClient) { }
 
   /**
-   * Метод загружает все группы с сервера
+   * The method loads all groups from the server
    */
   fetchAllGroups(): Observable<Group[]> {
     return this.http.get<Group[]>(this.baseUrl);
   }
 
   /**
-   * Загружает представление группы по id
-   * 
-   * @param id группы которую надо загрузить
+   * Loads the group view by id
+   *
+   * @param id of the group you want to load
    */
   fetchById(id: number): Observable<Group> {
     return this.http.get<Group>(`${this.baseUrl}/${id}`);
   }
 
   /**
-   * Загружает всех пользователей который находятся в группе
-   * 
-   * @param id группы
+   * Loads all users who are in a group
+   *
+   * @param id group
    */
   fetchUsersInGroup(id: number): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}/${id}/users`);

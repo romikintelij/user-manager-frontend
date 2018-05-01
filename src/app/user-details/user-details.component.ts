@@ -14,25 +14,25 @@ import { Button } from 'protractor';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
-  /** Информация о пользователе */
+  /** user information */
   currentUser: User;
 
-  /** Группы которые можно использовать для привязки к пользователю */
+  /** Groups that can be used to bind to a user */
   groups: Group[] = [];
 
-  /** Группы которые сейчас привязаны к пользователю */
+  /** Groups that are now tied to the user */
   userGroups: Group[] = [];
 
-  /** Выбранная группа, для добавления */
+  /** The selected group to add */
   selectedGroup: Group
 
   userSaved: boolean;
 
-  /** Ошибка с сервера */
+  /** server error */
   serverError: string;
 
   /**
-   * Выбранная пользователем группа
+   * User-selected group
    */
   selectedGroupIndex: number;
 
@@ -52,46 +52,46 @@ export class UserDetailsComponent implements OnInit {
   }
 
   /**
-   * Загружаем пользователя по переданному id из запроса
+   * load the user according to the transmitted id from the request
    */
   private loadUser(userId: number) {
     this.usersService.fetchUserById(userId).subscribe(user => this.currentUser = user);
   }
 
   /**
-   * Загружает все группы с сервера для того чтобы в форме их вывести
+   * Loads all groups from the server in order to output them in the form
    */
   private loadAllGroups() {
     this.groupsService.fetchAllGroups().subscribe(groups => this.groups = groups);
   }
 
   /**
-   * Загружает группы пользователя, которые сейчас привязаны к пользователю
-   * 
-   * @param userId id пользователя
+   * Loads user groups that are tied to the user
+   *
+   * @param userId id
    */
   private loadUserGroups(userId: number) {
     this.usersService.fetchUserGroups(userId).subscribe(groups => this.userGroups = groups);
   }
 
   /**
-   * Этот метод вызывается когда клиентский код пытается вывести группы пользователей
-   * через запятую
+   * This method is called when the client code tries to display groups of users
+   * separated by commas
    */
   get userGroupNames() {
     return this.userGroups.map(group => group.name);
   }
 
   /**
-   * Этот метод возвращает доступные для выбора группы
-   * 
-   * Эффективность этого метода заставляет желать лучшего
-   * todo: переделать, если останется время
+   * This method returns the selectable groups
+   *
+   *
+   *
    */
   get availableUserGroups() {
     const available = [];
 
-    // Находит расхождение между массивами
+    //Finds the discrepancy between arrays
     for (let group of this.groups) {
       let founded = false;
       for (let userGroup of this.userGroups) {
@@ -108,7 +108,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   /**
-   * Добавляет выбранную пользователем группу в его группы
+   * Adds a user-selected group to its groups
    */
   addSelectedGroup() {
     if (!this.selectedGroup) {
@@ -120,9 +120,9 @@ export class UserDetailsComponent implements OnInit {
   }
 
   /**
-   * Удаляет группу у пользователя
-   * 
-   * @param selectedGroup выбранная группа
+   * Deletes a group from the user
+   *
+   * @param selectedGroup
    */
   deleteGroup(selectedGroup) {
     const indx = this.userGroups.findIndex(group => group.id === selectedGroup.id);
@@ -133,7 +133,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   /**
-   * Сохраняет информацию о пользователе на сервере
+   * Saves information about the user on the server
    */
   saveUserDetails() {
     this.usersService.saveUser(this.currentUser.id, this.currentUser)
